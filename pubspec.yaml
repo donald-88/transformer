@@ -37,6 +37,11 @@ dependencies:
   google_maps_flutter: ^2.2.1
   location: ^4.4.0
   flutter_polyline_points: ^1.0.0
+  google_fonts: ^3.0.1
+  iconsax: ^0.0.8
+  rive: ^0.9.1
+  sms_receiver: ^0.4.1
+  sms: ^0.2.4
 
 dev_dependencies:
   flutter_test:
