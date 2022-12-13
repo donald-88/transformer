@@ -43,7 +43,9 @@ class _HomeState extends State<Home> {
     db.loadData();
     return Center(
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, '/notifications');
+        },
         child: Container(
           height: width - 80,
           width: width - 80,

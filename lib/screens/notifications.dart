@@ -39,7 +39,11 @@ class _NotificationsState extends State<Notifications> {
           child: ListView.builder(
               itemCount: db.alerts.length,
               itemBuilder: (context, index) {
-                return NotificationCard();
+                return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/map');
+                    },
+                    child: NotificationCard());
               }),
         )
       ],

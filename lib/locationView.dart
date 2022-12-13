@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sms/sms.dart';
+import 'package:transformer/screens/fake-map.dart';
 import 'package:transformer/screens/home.dart';
 import 'package:transformer/screens/notifications.dart';
 import 'package:transformer/screens/stats.dart';
@@ -23,8 +23,6 @@ class LocationView extends StatefulWidget {
 }
 
 class _LocationViewState extends State<LocationView> {
-  static const LatLng _sourceLocation = LatLng(25.289180, 55.437480);
-  static const LatLng _destinedLocation = LatLng(-13.938930, 33.787050);
 
   //reference to hive box
   final _myBox = Hive.box('myBox');
