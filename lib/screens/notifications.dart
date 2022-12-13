@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:transformer/database.dart';
+import 'package:transformer/widgets/notification-card.dart';
 
-class Notifications extends StatelessWidget {
-  const Notifications({Key? key}) : super(key: key);
+class Notifications extends StatefulWidget {
+  @override
+  State<Notifications> createState() => _NotificationsState();
+}
+
+class _NotificationsState extends State<Notifications> {
+  //reference to hive box
+  final _myBox = Hive.box('myBox');
+
+  MyDatabase db = MyDatabase();
+
+  //read data
+  @override
+  void initState() {
+    super.initState();
+    db.loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    const locationAnim = 'assets/location.riv';
-    TextStyle normal =
-        GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400);
     TextStyle heading =
         GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold);
     return Column(
@@ -21,31 +36,12 @@ class Notifications extends StatelessWidget {
             style: heading,
           )),
         ),
-        Container(
-          decoration: const BoxDecoration(
-              color: Colors.white10,
-              borderRadius: BorderRadius.all(Radius.circular(14))),
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Intrusion Alert", style: normal,),
-                  Text("Area 47, Gateway Mall", style: normal,)
-                ],
-              ),
-              Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(60)),
-                    border: Border.all(width: 2, color: Colors.white)),
-                child: Center(child: Text("0m", style: normal)),
-              ),
-            ],
-          ),
+        Expanded(
+          child: ListView.builder(
+              itemCount: db.alerts.length,
+              itemBuilder: (context, index) {
+                return NotificationCard();
+              }),
         )
       ],
     );

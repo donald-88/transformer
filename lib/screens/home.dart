@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sms/sms.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:transformer/database.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
   @override
   State<Home> createState() => _HomeState();
 }
@@ -15,40 +14,61 @@ class _HomeState extends State<Home> {
   TextStyle alerts =
       GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400);
 
-
-      String myMessage = "";
   int count = 0;
 
+  Color noAlertColor = Colors.white;
+  Color alertColor = Colors.red;
+
+  //reference to hive box
+  final _myBox = Hive.box('myBox');
+
+  //reference to database
+  MyDatabase db = MyDatabase();
+
   @override
+
+  //read data
   void initState() {
     super.initState();
-
-    SmsReceiver receiver = SmsReceiver();
-    receiver.onSmsReceived.listen((SmsMessage msg) => setState(() {
-          myMessage = msg.body;
-          count++;
-        }));
+    db.loadData();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Center(
-      child: Container(
-        height: width - 80,
-        width: width - 80,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(width)),
-            border: Border.all(width: 2, color: Colors.white)),
-        child: Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Text(count.toString(), style: numbers),
-            Positioned(
-                bottom: 50, child: Text("Alerts registered.", style: alerts))
-          ],
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: width - 80,
+          width: width - 80,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(width)),
+              border: Border.all(
+                  width: 2, color: count == 0 ? noAlertColor : alertColor)),
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Text(db.alerts.length.toString(), style: numbers),
+              Positioned(
+                  bottom: 50, child: Text("Alerts registered.", style: alerts))
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+class AlertNotification {
+  final String message;
+  final String location;
+  final DateTime date;
+  final String sender;
+
+  AlertNotification(
+      {required this.message,
+      required this.location,
+      required this.date,
+      required this.sender});
 }
