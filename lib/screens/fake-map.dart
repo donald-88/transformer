@@ -35,9 +35,10 @@ class _FakeMapState extends State<FakeMap> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Transform(
+              alignment: FractionalOffset.center,
               transform: Matrix4.diagonal3(Vector3(_scale, _scale, _scale)),
               child: Image.asset(
-                'map.png',
+                'assets/map.png',
                 fit: BoxFit.cover,
               ),
             )),

@@ -3,12 +3,9 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sms/sms.dart';
-import 'package:transformer/screens/fake-map.dart';
 import 'package:transformer/screens/home.dart';
 import 'package:transformer/screens/notifications.dart';
 import 'package:transformer/screens/stats.dart';
-
-import 'database.dart';
 
 class LocationView extends StatefulWidget {
   //receive sms
@@ -23,21 +20,25 @@ class LocationView extends StatefulWidget {
 }
 
 class _LocationViewState extends State<LocationView> {
-
   //reference to hive box
   final _myBox = Hive.box('myBox');
-  MyDatabase db = MyDatabase();
+
+  Future<void> _addAlert(alert) async {
+    _myBox.add(alert);
+  }
 
   @override
   void initState() {
     super.initState();
 
-    db.createInitialData();
-
     SmsReceiver receiver = SmsReceiver();
     receiver.onSmsReceived.listen((SmsMessage msg) {
-      db.alerts.add(msg.body);
-      db.saveData();
+      setState(() {
+        widget.myMessage = msg.body;
+      });
+
+      //add alert to hive box
+      _addAlert(widget.myMessage);
     });
   }
 

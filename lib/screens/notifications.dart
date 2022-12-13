@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:transformer/database.dart';
 import 'package:transformer/widgets/notification-card.dart';
 
 class Notifications extends StatefulWidget {
@@ -13,8 +12,6 @@ class _NotificationsState extends State<Notifications> {
   //reference to hive box
   final _myBox = Hive.box('myBox');
 
-  MyDatabase db = MyDatabase();
-
   //read data
   @override
   void initState() {
@@ -25,28 +22,30 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     TextStyle heading =
         GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold);
-    return Column(
-      children: [
-        SizedBox(
-          height: 70,
-          child: Center(
-              child: Text(
-            "Notifications",
-            style: heading,
-          )),
-        ),
-        Expanded(
-          child: ListView.builder(
-              itemCount: db.alerts.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/map');
-                    },
-                    child: NotificationCard());
-              }),
-        )
-      ],
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(
+            height: 70,
+            child: Center(
+                child: Text(
+              "Notifications",
+              style: heading,
+            )),
+          ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: _myBox.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'map');
+                      },
+                      child: NotificationCard());
+                }),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:transformer/database.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,12 +8,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextStyle numbers =
-      GoogleFonts.poppins(fontSize: 64, fontWeight: FontWeight.w400);
-  TextStyle alerts =
-      GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400);
-
-  int count = 0;
+  
 
   Color noAlertColor = Colors.white;
   Color alertColor = Colors.red;
@@ -22,29 +16,21 @@ class _HomeState extends State<Home> {
   //reference to hive box
   final _myBox = Hive.box('myBox');
 
-  //reference to database
-  MyDatabase db = MyDatabase();
-
-  @override
-
-  //read data
-  void initState() {
-    super.initState();
-    setState(() {
-      count = db.alerts.length;
-      print(count);
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
 
-    db.loadData();
+    TextStyle numbers = GoogleFonts.poppins(
+        fontSize: 64, fontWeight: FontWeight.w400, color: _myBox.length == 0 ? noAlertColor : alertColor);
+    TextStyle alerts =
+        GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400, color: _myBox.length == 0 ? noAlertColor : alertColor);
+
+    double width = MediaQuery.of(context).size.width;
     return Center(
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/notifications');
+          Navigator.pushNamed(context, 'notification');
         },
         child: Container(
           height: width - 80,
@@ -52,11 +38,11 @@ class _HomeState extends State<Home> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(width)),
               border: Border.all(
-                  width: 2, color: count == 0 ? noAlertColor : alertColor)),
+                  width: 2, color: _myBox.length == 0 ? noAlertColor : alertColor)),
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
-              Text(count.toString(), style: numbers),
+              Text(_myBox.length.toString(), style: numbers),
               Positioned(
                   bottom: 50, child: Text("Alerts registered.", style: alerts))
             ],

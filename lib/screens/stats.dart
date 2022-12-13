@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:transformer/database.dart';
 
 class Stats extends StatefulWidget {
   @override
@@ -12,14 +11,12 @@ class _StatsState extends State<Stats> {
   //reference hive box
   final _myBox = Hive.box('myBox');
 
-  MyDatabase db = MyDatabase();
-
   var rowItems = [];
 
   @override
   void initState() {
     super.initState();
-    for (var i in db.alerts) {
+    for (var i in _myBox.values) {
       rowItems.add(RowItem("14-12-22", "Intrusion", "Blantyre", false));
     }
   }
