@@ -30,12 +30,17 @@ class _HomeState extends State<Home> {
   //read data
   void initState() {
     super.initState();
-    db.loadData();
+    setState(() {
+      count = db.alerts.length;
+      print(count);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
+    db.loadData();
     return Center(
       child: GestureDetector(
         onTap: () {},
@@ -49,7 +54,7 @@ class _HomeState extends State<Home> {
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
-              Text(db.alerts.length.toString(), style: numbers),
+              Text(count.toString(), style: numbers),
               Positioned(
                   bottom: 50, child: Text("Alerts registered.", style: alerts))
             ],

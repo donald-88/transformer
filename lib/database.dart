@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 class MyDatabase {
-  List alerts = [];
+  List alerts = [1];
 
   //reference to hive box
   final _myBox = Hive.box('myBox');

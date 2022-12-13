@@ -30,28 +30,16 @@ class _LocationViewState extends State<LocationView> {
   final _myBox = Hive.box('myBox');
   MyDatabase db = MyDatabase();
 
-  //write to box
-  void writeData(message, location, date) {
-    _myBox.put('myMessage', message);
-    _myBox.put('location', location);
-    _myBox.put('date', date);
-  }
-
-  //read data
-
-  void readData() {
-    _myBox.get('myMessage');
-  }
-
   @override
   void initState() {
     super.initState();
+
+    db.createInitialData();
 
     SmsReceiver receiver = SmsReceiver();
     receiver.onSmsReceived.listen((SmsMessage msg) {
       db.alerts.add(msg.body);
       db.saveData();
-      print(db.alerts[0]);
     });
   }
 

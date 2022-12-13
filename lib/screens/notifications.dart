@@ -19,7 +19,6 @@ class _NotificationsState extends State<Notifications> {
   @override
   void initState() {
     super.initState();
-    db.loadData();
   }
 
   @override

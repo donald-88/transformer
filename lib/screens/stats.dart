@@ -14,20 +14,18 @@ class _StatsState extends State<Stats> {
 
   MyDatabase db = MyDatabase();
 
+  var rowItems = [];
+
   @override
   void initState() {
     super.initState();
-    db.loadData();
+    for (var i in db.alerts) {
+      rowItems.add(RowItem("14-12-22", "Intrusion", "Blantyre", false));
+    }
   }
-
-  final List<RowItem> _rowItems = [];
 
   @override
   Widget build(BuildContext context) {
-    for (var element in db.alerts) {
-      _rowItems.add(RowItem(element['date'], element['alert'],
-          element['location'], element['response']));
-    }
     TextStyle normal =
         GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400);
     TextStyle tableHeader =
@@ -57,12 +55,12 @@ class _StatsState extends State<Stats> {
                 DataColumn(label: Text('Location', style: tableHeader)),
                 DataColumn(label: Text('Response', style: tableHeader))
               ],
-              rows: _rowItems
+              rows: rowItems
                   .map((e) => DataRow(cells: [
-                        DataCell(Text(e.date.toString(), style: normal)),
-                        DataCell(Text(e.alert, style: normal)),
-                        DataCell(Text(e.location, style: normal)),
-                        DataCell(Text(e.response.toString(), style: normal)),
+                        DataCell(Text("14-12-22", style: normal)),
+                        DataCell(Text("Intrusion", style: normal)),
+                        DataCell(Text("Blantyre", style: normal)),
+                        DataCell(Text("false", style: normal)),
                       ]))
                   .toList()),
         ],
@@ -72,7 +70,7 @@ class _StatsState extends State<Stats> {
 }
 
 class RowItem {
-  final int date;
+  final String date;
   final String alert;
   final String location;
   final bool response;
