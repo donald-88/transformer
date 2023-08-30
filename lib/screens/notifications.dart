@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:transformer/widgets/notification-card.dart';
 
 class Notifications extends StatefulWidget {
+  const Notifications({super.key});
+
   @override
   State<Notifications> createState() => _NotificationsState();
 }
 
 class _NotificationsState extends State<Notifications> {
-  //reference to hive box
-  final _myBox = Hive.box('myBox');
 
   //read data
   @override
@@ -20,28 +18,25 @@ class _NotificationsState extends State<Notifications> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle heading =
-        GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold);
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 70,
             child: Center(
                 child: Text(
               "Notifications",
-              style: heading,
             )),
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: _myBox.length,
+                itemCount: 0,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, 'map');
                       },
-                      child: NotificationCard());
+                      child: const NotificationCard());
                 }),
           )
         ],

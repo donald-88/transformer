@@ -1,31 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  
-
-  Color noAlertColor = Colors.white;
+  Color noAlertColor = Colors.green;
   Color alertColor = Colors.red;
-
-  //reference to hive box
-  final _myBox = Hive.box('myBox');
-
-  
 
   @override
   Widget build(BuildContext context) {
-
-    TextStyle numbers = GoogleFonts.poppins(
-        fontSize: 64, fontWeight: FontWeight.w400, color: _myBox.length == 0 ? noAlertColor : alertColor);
-    TextStyle alerts =
-        GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400, color: _myBox.length == 0 ? noAlertColor : alertColor);
-
     double width = MediaQuery.of(context).size.width;
     return Center(
       child: GestureDetector(
@@ -38,13 +25,19 @@ class _HomeState extends State<Home> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(width)),
               border: Border.all(
-                  width: 2, color: _myBox.length == 0 ? noAlertColor : alertColor)),
+                  width: 2,
+                  color:alertColor)),
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
-              Text(_myBox.length.toString(), style: numbers),
+              Text('0', style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold, fontSize: 80, color: Colors.green)),
               Positioned(
-                  bottom: 50, child: Text("Alerts registered.", style: alerts))
+                  bottom: 50,
+                  child: Text("Alerts registered.",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(fontWeight: FontWeight.w700, color: Colors.green)))
             ],
           ),
         ),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:sms/sms.dart';
 import 'package:transformer/screens/home.dart';
 import 'package:transformer/screens/notifications.dart';
 import 'package:transformer/screens/stats.dart';
 
+// ignore: must_be_immutable
 class LocationView extends StatefulWidget {
   //receive sms
   int count = 0;
@@ -15,35 +13,23 @@ class LocationView extends StatefulWidget {
   String sender = "";
   DateTime date = DateTime.now();
 
+  LocationView({super.key});
+
   @override
   State<LocationView> createState() => _LocationViewState();
 }
 
 class _LocationViewState extends State<LocationView> {
-  //reference to hive box
-  final _myBox = Hive.box('myBox');
-
-  Future<void> _addAlert(alert) async {
-    _myBox.add(alert);
-  }
 
   @override
   void initState() {
     super.initState();
 
-    SmsReceiver receiver = SmsReceiver();
-    receiver.onSmsReceived.listen((SmsMessage msg) {
-      setState(() {
-        widget.myMessage = msg.body;
-      });
 
-      //add alert to hive box
-      _addAlert(widget.myMessage);
-    });
   }
 
   int currentIndex = 0;
-  List screens = [Home(), Notifications(), Stats()];
+  List screens = [const Home(), const Notifications(), const Stats()];
 
   @override
   Widget build(BuildContext context) {

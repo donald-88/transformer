@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NotificationCard extends StatelessWidget {
+  const NotificationCard({super.key});
+
   @override
   Widget build(BuildContext context) {
-    TextStyle normal =
-        GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400);
     return Container(
       decoration: const BoxDecoration(
           color: Colors.white10,
@@ -15,11 +14,11 @@ class NotificationCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Intruder alert", style: normal),
-              Text("Blantyre, Umoyo House", style: normal)
+              Text("Intruder alert"),
+              Text("Blantyre, Umoyo House")
             ],
           ),
           Container(
@@ -28,7 +27,7 @@ class NotificationCard extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(60)),
                 border: Border.all(width: 2, color: Colors.white)),
-            child: Center(child: Text("0d", style: normal)),
+            child: const Center(child: Text("0d",)),
           ),
         ],
       ),
