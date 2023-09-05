@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:transformer/pages/home.dart';
-import 'package:transformer/pages/notifications.dart';
-import 'package:transformer/pages/controlPanel.dart';
-import 'package:transformer/pages/profile.dart';
+import 'package:transformer/pages/tabs/controlPanel.dart';
+import 'package:web_socket_channel/io.dart';
+
+import 'tabs/home.dart';
+import 'tabs/notifications.dart';
+import 'tabs/profile.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
@@ -21,21 +23,35 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final channel =
+      IOWebSocketChannel.connect(Uri.parse('ws://192.168.2.10:81'));
   @override
   void initState() {
     super.initState();
+    streamListener();
+  }
+
+  streamListener() {
+    channel.stream.listen((message) {
+      if(message.toString().startsWith("PIR")){
+        setState(() {
+          pirStatus = true;
+        });
+      }
+    });
   }
 
   int currentIndex = 0;
-  List screens = [
-    const Home(),
-    const Notifications(),
-    const Stats(),
-    Profile()
-  ];
+  bool pirStatus = false;
 
   @override
   Widget build(BuildContext context) {
+    List screens = [
+      Home(pirStatus: pirStatus),
+      const Notifications(),
+      ControlPanel(onBatteryStatusChange: ()=> sendWebSocketMessage("")),
+      Profile()
+    ];
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -59,5 +75,9 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(label: "", icon: Icon(Iconsax.user))
           ]),
     );
+  }
+
+  void sendWebSocketMessage(String message) {
+    channel.sink.add(message);
   }
 }

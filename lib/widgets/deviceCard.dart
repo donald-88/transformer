@@ -12,6 +12,7 @@ class DeviceCard extends StatelessWidget {
     return SizedBox(
       width: 100,
       child: Card(
+        color: const Color(0xFFE5E8E1),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

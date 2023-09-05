@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:transformer/widgets/controlCard.dart';
 
-class Stats extends StatefulWidget {
-  const Stats({super.key});
+class ControlPanel extends StatefulWidget {
+  final Function? onBatteryStatusChange;
+  const ControlPanel({super.key, this.onBatteryStatusChange});
 
   @override
-  State<Stats> createState() => _StatsState();
+  State<ControlPanel> createState() => _ControlPanelState();
 }
 
-class _StatsState extends State<Stats> {
+class _ControlPanelState extends State<ControlPanel> {
   @override
   void initState() {
     super.initState();
@@ -20,24 +21,32 @@ class _StatsState extends State<Stats> {
     List<ControlCardModel> controlItems = [
       ControlCardModel(
           icon: Iconsax.battery_full,
+          canTweak: true,
           control: 'Battery',
           color: Theme.of(context).primaryColor,
-          contentColor: Theme.of(context).colorScheme.surface),
+          contentColor: const Color(0xFFE5E8E1),
+          onChanged: widget.onBatteryStatusChange),
       ControlCardModel(
           icon: Iconsax.alarm,
+          canTweak: false,
           control: 'Intrusion',
-          color: Theme.of(context).colorScheme.background,
-          contentColor: Theme.of(context).primaryColor),
+          color: const Color(0xFFE5E8E1),
+          contentColor: Theme.of(context).primaryColor,
+          onChanged: (){}),
       ControlCardModel(
           icon: Iconsax.chart,
           control: 'Oil Level',
-          color: Theme.of(context).colorScheme.background,
-          contentColor: Theme.of(context).primaryColor),
+          canTweak: false,
+          color: const Color(0xFFE5E8E1),
+          contentColor: Theme.of(context).primaryColor,
+          onChanged: (){}),
       ControlCardModel(
           icon: Iconsax.hierarchy,
           control: 'Circuit',
-          color: Theme.of(context).colorScheme.background,
-          contentColor: Theme.of(context).primaryColor),
+          canTweak: false,
+          color: const Color(0xFFE5E8E1),
+          contentColor: Theme.of(context).primaryColor,
+          onChanged: (){}),
     ];
     return Scaffold(
         appBar: AppBar(
@@ -52,12 +61,14 @@ class _StatsState extends State<Stats> {
               child: GridView.builder(
                   itemCount: controlItems.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: .8,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
+                      childAspectRatio: .9,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
                       crossAxisCount: 2),
                   itemBuilder: (context, index) => ControlCard(
+                    onChanged: controlItems[index].onChanged,
                       color: controlItems[index].color,
+                      canTweak: controlItems[index].canTweak,
                       control: controlItems[index].control,
                       icon: controlItems[index].icon,
                       contentColor: controlItems[index].contentColor)),
@@ -68,13 +79,17 @@ class _StatsState extends State<Stats> {
 }
 
 class ControlCardModel {
+  final bool canTweak;
   final IconData icon;
   final Color contentColor;
   final String control;
   final Color color;
+  final Function? onChanged;
   ControlCardModel(
       {required this.icon,
+      required this.canTweak,
       required this.control,
       required this.color,
-      required this.contentColor});
+      required this.contentColor,
+      required this.onChanged});
 }

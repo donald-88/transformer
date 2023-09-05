@@ -3,17 +3,15 @@ import 'package:iconsax/iconsax.dart';
 import 'package:transformer/services/authService.dart';
 import 'package:transformer/widgets/deviceCard.dart';
 
-
 class Profile extends StatelessWidget {
   Profile({super.key});
-   final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService();
 
-   void signOut() async{
-     await _auth.signOut();
-   }
+  void signOut() async {
+    await _auth.signOut();
+  }
 
   @override
- 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -41,32 +39,36 @@ class Profile extends StatelessWidget {
               ),
               DeviceCard(
                 value: '1',
-                metric: "Inactive",
+                metric: "Offline",
               ),
               DeviceCard(
                 value: '5',
-                metric: 'IDK',
+                metric: '',
               )
             ]),
             const SizedBox(height: 20),
             Card(
+              color: const Color(0xFFE5E8E1),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     ListTile(
-                        leading: Icon(Iconsax.clipboard_export,color: Theme.of(context).colorScheme.primary),
+                        leading: Icon(Iconsax.clipboard_export,
+                            color: Theme.of(context).colorScheme.primary),
                         title: Text('Report a Problem',
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary))),
                     ListTile(
-                        leading:  Icon(Iconsax.call, color: Theme.of(context).colorScheme.primary),
+                        leading: Icon(Iconsax.call,
+                            color: Theme.of(context).colorScheme.primary),
                         title: Text('Help',
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary))),
                     ListTile(
-                      onTap: signOut,
-                        leading: Icon(Iconsax.logout, color: Theme.of(context).colorScheme.primary),
+                        onTap: signOut,
+                        leading: Icon(Iconsax.logout,
+                            color: Theme.of(context).colorScheme.primary),
                         title: Text('Logout',
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary))),

@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transformer/pages/authentication/authGate.dart';
 import 'package:transformer/pages/fake-map.dart';
-import 'package:transformer/pages/home.dart';
-import 'package:transformer/pages/notifications.dart';
-import 'package:transformer/pages/controlPanel.dart';
 import 'firebase_options.dart';
+import 'pages/tabs/notifications.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        cardColor: const Color(0xFFE5E8E1),
           colorSchemeSeed: const Color(0xff097134),
           textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme.apply(
               bodyColor: const Color(0xff097134),
@@ -34,10 +33,8 @@ class MyApp extends StatelessWidget {
           useMaterial3: true),
       home: const AuthGate(),
       routes: {
-        'home': (context) => const Home(),
         'notification': (context) => const Notifications(),
         'map': (context) => FakeMap(),
-        'stats': (context) => const Stats(),
       },
     );
   }
