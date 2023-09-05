@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:transformer/widgets/notification-card.dart';
+import 'package:transformer/widgets/notificationCard.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
