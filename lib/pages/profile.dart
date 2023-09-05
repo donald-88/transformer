@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:transformer/services/authService.dart';
 import 'package:transformer/widgets/deviceCard.dart';
 
+
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+  Profile({super.key});
+   final AuthService _auth = AuthService();
+
+   void signOut() async{
+     await _auth.signOut();
+   }
 
   @override
+ 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -57,6 +65,7 @@ class Profile extends StatelessWidget {
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary))),
                     ListTile(
+                      onTap: signOut,
                         leading: Icon(Iconsax.logout, color: Theme.of(context).colorScheme.primary),
                         title: Text('Logout',
                             style: TextStyle(

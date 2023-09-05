@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
     const Home(),
     const Notifications(),
     const Stats(),
-    const Profile()
+    Profile()
   ];
 
   @override
