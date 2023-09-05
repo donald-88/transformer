@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:transformer/locationView.dart';
+import 'package:transformer/mainPage.dart';
+import 'package:transformer/screens/authentication/signIn.dart';
 import 'package:transformer/screens/fake-map.dart';
 import 'package:transformer/screens/home.dart';
 import 'package:transformer/screens/notifications.dart';
@@ -19,7 +20,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        
           colorSchemeSeed: const Color(0xff097134),
           textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme.apply(
               bodyColor: const Color(0xff097134),
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           useMaterial3: true),
-      home: LocationView(),
+      home: const SignIn(),
       routes: {
         'home': (context) => const Home(),
         'notification': (context) => const Notifications(),

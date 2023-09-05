@@ -6,7 +6,7 @@ import 'package:transformer/screens/controlPanel.dart';
 import 'package:transformer/screens/profile.dart';
 
 // ignore: must_be_immutable
-class LocationView extends StatefulWidget {
+class MainPage extends StatefulWidget {
   //receive sms
   int count = 0;
   String myMessage = "";
@@ -14,23 +14,25 @@ class LocationView extends StatefulWidget {
   String sender = "";
   DateTime date = DateTime.now();
 
-  LocationView({super.key});
+  MainPage({super.key});
 
   @override
-  State<LocationView> createState() => _LocationViewState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _LocationViewState extends State<LocationView> {
-
+class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-
-
   }
 
   int currentIndex = 0;
-  List screens = [const Home(), const Notifications(), const Stats(), const Profile()];
+  List screens = [
+    const Home(),
+    const Notifications(),
+    const Stats(),
+    const Profile()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +44,13 @@ class _LocationViewState extends State<LocationView> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
           onTap: (index) => setState(() {
                 currentIndex = index;
               }),
           unselectedItemColor: Colors.grey,
-          selectedItemColor: Theme.of(context).primaryColor,   
+          selectedItemColor: Theme.of(context).primaryColor,
           items: const [
             BottomNavigationBarItem(label: "", icon: Icon(Iconsax.home)),
             BottomNavigationBarItem(
