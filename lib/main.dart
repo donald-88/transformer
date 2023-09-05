@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:transformer/screens/authentication/authGate.dart';
-import 'package:transformer/screens/fake-map.dart';
-import 'package:transformer/screens/home.dart';
-import 'package:transformer/screens/notifications.dart';
-import 'package:transformer/screens/controlPanel.dart';
+import 'package:transformer/pages/authentication/authGate.dart';
+import 'package:transformer/pages/fake-map.dart';
+import 'package:transformer/pages/home.dart';
+import 'package:transformer/pages/notifications.dart';
+import 'package:transformer/pages/controlPanel.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {

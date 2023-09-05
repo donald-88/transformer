@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transformer/services/authService.dart';
 
 import '../../widgets/myTextInput.dart';
 
@@ -11,8 +12,14 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 TextEditingController idNumberController = TextEditingController();
-
 TextEditingController passwordController = TextEditingController();
+ final AuthService _auth = AuthService();
+
+void signIn() async{
+  String idNumber = idNumberController.text;
+  String password = passwordController.text;
+  dynamic result = await _auth.signInWithEmailAndPassword(idNumber, password);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,7 @@ TextEditingController passwordController = TextEditingController();
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         minimumSize: const Size(300, 60)),
-                    onPressed: () {},
+                    onPressed: signIn,
                     child: const Center(
                         child: Text(
                       'Login',

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:transformer/screens/home.dart';
-import 'package:transformer/screens/notifications.dart';
-import 'package:transformer/screens/controlPanel.dart';
-import 'package:transformer/screens/profile.dart';
+import 'package:transformer/pages/home.dart';
+import 'package:transformer/pages/notifications.dart';
+import 'package:transformer/pages/controlPanel.dart';
+import 'package:transformer/pages/profile.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
