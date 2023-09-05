@@ -1,13 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:transformer/mainPage.dart';
-import 'package:transformer/screens/authentication/signIn.dart';
+import 'package:transformer/screens/authentication/authGate.dart';
 import 'package:transformer/screens/fake-map.dart';
 import 'package:transformer/screens/home.dart';
 import 'package:transformer/screens/notifications.dart';
 import 'package:transformer/screens/controlPanel.dart';
+import 'firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           useMaterial3: true),
-      home: const SignIn(),
+      home: const AuthGate(),
       routes: {
         'home': (context) => const Home(),
         'notification': (context) => const Notifications(),

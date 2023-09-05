@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274979680546",
+    "project_id": "escom-transformer",
+    "storage_bucket": "escom-transformer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274979680546:android:ac79f1c6dab14679f1f57b",
+        "android_client_info": {
+          "package_name": "com.example.transformer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274979680546-oehkgeb7u9ots2992j2d0d4pv7l65b89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6x1cGXUTm6Dah0i00q66pvzFsKZlkNnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274979680546-oehkgeb7u9ots2992j2d0d4pv7l65b89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

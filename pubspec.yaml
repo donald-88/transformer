@@ -38,6 +38,8 @@ dependencies:
   avatar_glow: ^2.0.2
   web_socket_channel: ^2.4.0
   google_fonts: ^5.1.0
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
 
 dev_dependencies:
   flutter_test:
