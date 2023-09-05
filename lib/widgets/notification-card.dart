@@ -7,7 +7,7 @@ class NotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          color: Colors.white10,
+          color: Color(0xffE5E8E1),
           borderRadius: BorderRadius.all(Radius.circular(14))),
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -26,8 +26,8 @@ class NotificationCard extends StatelessWidget {
             width: 60,
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(60)),
-                border: Border.all(width: 2, color: Colors.white)),
-            child: const Center(child: Text("0d",)),
+                border: Border.all(width: 2, color: Theme.of(context).colorScheme.primary)),
+            child: const Center(child: Text("2h",)),
           ),
         ],
       ),

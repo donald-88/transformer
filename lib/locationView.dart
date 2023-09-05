@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:transformer/screens/home.dart';
 import 'package:transformer/screens/notifications.dart';
-import 'package:transformer/screens/stats.dart';
+import 'package:transformer/screens/controlPanel.dart';
 
 // ignore: must_be_immutable
 class LocationView extends StatefulWidget {
@@ -45,12 +45,13 @@ class _LocationViewState extends State<LocationView> {
           onTap: (index) => setState(() {
                 currentIndex = index;
               }),
-          unselectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
+          
           items: const [
             BottomNavigationBarItem(label: "", icon: Icon(Iconsax.home)),
             BottomNavigationBarItem(
                 label: "", icon: Icon(Iconsax.notification)),
-            BottomNavigationBarItem(label: "", icon: Icon(Iconsax.calendar_2))
+            BottomNavigationBarItem(label: "", icon: Icon(Iconsax.candle_2))
           ]),
     );
   }

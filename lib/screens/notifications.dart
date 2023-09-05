@@ -19,18 +19,12 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Notifications',style: Theme.of(context).textTheme.titleLarge)),
       body: Column(
         children: [
-          const SizedBox(
-            height: 70,
-            child: Center(
-                child: Text(
-              "Notifications",
-            )),
-          ),
           Expanded(
             child: ListView.builder(
-                itemCount: 0,
+                itemCount: 1,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: () {
