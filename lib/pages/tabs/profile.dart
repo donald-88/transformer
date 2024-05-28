@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:transformer/services/authService.dart';
 import 'package:transformer/widgets/deviceCard.dart';
 
 class Profile extends StatelessWidget {
-  Profile({super.key});
-  final AuthService _auth = AuthService();
-
-  void signOut() async {
-    await _auth.signOut();
-  }
-
+  const Profile({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +18,7 @@ class Profile extends StatelessWidget {
             const SizedBox(height: 32),
             const CircleAvatar(radius: 64),
             const SizedBox(height: 16),
-            Text('David Blane', style: Theme.of(context).textTheme.titleLarge),
+            Text('David Banda', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 4),
             Text('Lilongwe South West',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -43,7 +36,7 @@ class Profile extends StatelessWidget {
               ),
               DeviceCard(
                 value: '5',
-                metric: '',
+                metric: 'Faulty',
               )
             ]),
             const SizedBox(height: 20),
@@ -66,7 +59,7 @@ class Profile extends StatelessWidget {
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary))),
                     ListTile(
-                        onTap: signOut,
+                        onTap: (){},
                         leading: Icon(Iconsax.logout,
                             color: Theme.of(context).colorScheme.primary),
                         title: Text('Logout',
